@@ -1,11 +1,13 @@
 {
   "main": "dist/index.js",
   "scripts": {
-  "build": "tsc",
-  "start": "tsc & node .",
-  "dev": "tsc -w & nodemon ."
-},
+    "build": "tsc",
+    "start": "tsc & node .",
+    "dev": "nodemon src/services/PersonalData.ts"
+  },
   "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1"
   },
   "devDependencies": {
