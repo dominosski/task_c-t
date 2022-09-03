@@ -3,6 +3,7 @@ import express from 'express'
 export const router = express.Router()
 import {validateId} from '../middleware/idValidation'
 import {dataMapper} from '../mapper/PersonalDataMapper'
+import {sendMessage} from '../routers/Rabbitmq'
 
 require('dotenv').config();
 
@@ -21,10 +22,14 @@ const options: apiObject = {
 router.post('/api/v1/commands/run', validateId, async (req: any, res: any) => {
     const userId: number = req.body.id;
     try{
-        const data = await axios.get(`https://gorest.co.in/public/v1/users?id=${userId}`, options)
-        if(!data.data.data[0])
+        const apiData = await axios.get(`https://gorest.co.in/public/v1/users?id=${userId}`, options)
+        const data = apiData.data.data[0]
+        if(!data)
             return res.status(404).send()
-        res.send(dataMapper(data.data.data[0]))
+        const formattedData = dataMapper(data)
+        console.log(formattedData)
+        sendMessage(JSON.stringify(formattedData))
+        res.send(formattedData)
     }catch(e){
         res.status(500).send()
     }
