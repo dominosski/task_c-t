@@ -1,5 +1,5 @@
 import axios from 'axios'
-import express from 'express'
+import express, { Request, Response } from 'express'
 export const router = express.Router()
 import {validateId} from '../middleware/idValidation'
 import {dataMapper} from '../mapper/PersonalDataMapper'
@@ -19,7 +19,7 @@ const options: apiObject = {
     }
 }
 
-router.post('/api/v1/commands/run', validateId, async (req: any, res: any) => {
+router.post('/api/v1/commands/run', validateId, async (req: Request, res: Response) => {
     const userId: number = req.body.id;
     try{
         const apiData = await axios.get(`https://gorest.co.in/public/v1/users?id=${userId}`, options)
