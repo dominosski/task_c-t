@@ -17,7 +17,7 @@ const options: apiObject = {
     headers: {
         'Authorization': `Bearer ${process.env.GOREST_ACCESS_TOKEN}`
     }
-};
+}
 
 router.post('/api/v1/commands/run', validateId, async (req: any, res: any) => {
     const userId: number = req.body.id;
@@ -27,7 +27,6 @@ router.post('/api/v1/commands/run', validateId, async (req: any, res: any) => {
         if(!data)
             return res.status(404).send()
         const formattedData = dataMapper(data)
-        console.log(formattedData)
         sendMessage(JSON.stringify(formattedData))
         res.send(formattedData)
     }catch(e){

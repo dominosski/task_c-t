@@ -1,4 +1,4 @@
-import amqp from 'amqplib'
+import amqp, { ConsumeMessage } from 'amqplib'
 import fs from 'fs'
 
 var channel: any, connection: any
@@ -11,12 +11,14 @@ export const gatherData = async function connect(){
         channel = await connection.createChannel()
         await channel.assertQueue("rabbitQueue")
 
-        channel.consume("rabbitQueue", (data: any) => {
+        channel.consume("rabbitQueue", (data: ConsumeMessage) => {
             fs.appendFile('../TASK_C-T/apiData.txt', data.content + '\n', (err) => {
                 if(err) throw err
             })
 
             channel.ack(data)
+
+            return data.content
         })
     }catch(e){
         console.log(e)
@@ -25,3 +27,5 @@ export const gatherData = async function connect(){
     }
 }
 gatherData()
+
+export default gatherData
