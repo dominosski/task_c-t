@@ -1,6 +1,8 @@
-export const validateId = (req:any, res:any, next:any) => {
+import { NextFunction, Request, Response } from "express";
+
+export const validateId = (req: Request, res: Response, next: NextFunction) => {
     try{
-        const id = req.body.id;
+        const id: number = req.body.id;
         if(!id || id < 10 || id > 20)
             throw new Error()
         else{

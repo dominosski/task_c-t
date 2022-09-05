@@ -1,6 +1,6 @@
-import amqp from 'amqplib'
+import amqp, { Channel, Connection } from 'amqplib'
 
-var channel: any, connection: any
+var channel: Channel, connection: Connection
 
 connect()
 async function connect(){
@@ -8,7 +8,7 @@ async function connect(){
         const amqpServer = "amqp://localhost:5672"
         connection = await amqp.connect(amqpServer)
         channel = await connection.createChannel()
-        await channel.assertQueue("rabbitQueue")
+        await channel.assertQueue("personal-data")
     }catch(e){
         console.log(e)
         await channel.close()
@@ -18,6 +18,6 @@ async function connect(){
 
 
 
-export const sendMessage = async (data: any) => {
-    await channel.sendToQueue("rabbitQueue", Buffer.from(data))
+export const sendMessage = async (data: any ) => {
+    await channel.sendToQueue("personal-data", Buffer.from(data))
 }
