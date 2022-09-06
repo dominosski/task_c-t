@@ -1,7 +1,8 @@
 import express from 'express'
 import {gatherData} from '../routers/GatherData'
+import dotenv from 'dotenv'
 
-require('dotenv').config();
+dotenv.config()
 
 const port = process.env.GATHERDATA_PORT
 
