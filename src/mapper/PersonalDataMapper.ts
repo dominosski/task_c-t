@@ -1,4 +1,4 @@
-interface dataMapper {
+interface DataMapper {
     "uuid": number
     "name": string,
     "email": string,
@@ -7,7 +7,7 @@ interface dataMapper {
 }
 
 export const dataMapper = (data: any) => {
-    const transformedData: dataMapper = {
+    const transformedData: DataMapper = {
         uuid: data.id,
         name: data.name,
         email: data.email,

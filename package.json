@@ -1,15 +1,16 @@
 {
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "tsc & node .",
-    "dev": "nodemon src/services/PersonalData.ts",
+    "dev1": "nodemon src/services/PersonalData.ts",
+    "dev2": "nodemon src/services/GatherData.ts",
     "test": "jest --coverage"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "ts-node": "^10.9.1"
   },
   "jest": {
     "preset": "ts-jest",

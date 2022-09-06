@@ -16,8 +16,6 @@ async function connect(){
     }
 }
 
-
-
 export const sendMessage = async (data: any ) => {
     await channel.sendToQueue("personal-data", Buffer.from(data))
 }

@@ -7,12 +7,12 @@ import {sendMessage} from '../routers/Rabbitmq'
 
 require('dotenv').config();
 
-type apiObject = {
+interface ApiObject {
     method: string,
     headers:  {'Authorization':string},
 }
 
-const options: apiObject = {
+const options: ApiObject = {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${process.env.GOREST_ACCESS_TOKEN}`
@@ -20,7 +20,7 @@ const options: apiObject = {
 }
 
 router.post('/api/v1/commands/run', validateId, async (req: Request, res: Response) => {
-    const userId: number = req.body.id;
+    const userId = parseInt(req.body.id)
     try{
         const apiData = await axios.get(`https://gorest.co.in/public/v1/users?id=${userId}`, options)
         const data = apiData.data.data[0]

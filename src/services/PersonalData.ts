@@ -1,7 +1,8 @@
 import express from 'express'
 import {router} from '../routers/PersonalData'
+import dotenv from 'dotenv'
 
-require('dotenv').config();
+dotenv.config()
 
 const port = process.env.PORT
 
